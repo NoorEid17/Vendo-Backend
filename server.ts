@@ -5,6 +5,7 @@ import * as cors from "cors";
 import { AppDataSource } from "./src/config/db";
 
 import userRouter from "./src/modules/User/user.router";
+import errorHandler from "./src/utils/errorHandler";
 
 const app = express();
 app.use(cors("*"));
@@ -23,6 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(logger("dev"));
 
 app.use("/api/user", userRouter);
+
+app.use(errorHandler);
 
 app.listen(3000, (err) => {
   if (err) {
