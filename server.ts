@@ -2,6 +2,7 @@ require("dotenv").config();
 import * as express from "express";
 import * as logger from "morgan";
 import * as cors from "cors";
+import * as cookieParser from "cookie-parser";
 import { AppDataSource } from "./src/config/db";
 
 import userRouter from "./src/modules/User/user.router";
@@ -9,6 +10,7 @@ import errorHandler from "./src/utils/errorHandler";
 
 const app = express();
 app.use(cors("*"));
+app.use(cookieParser());
 
 AppDataSource.initialize()
   .then(() => {

@@ -43,3 +43,22 @@ export const login = asyncHandler(async (req, res) => {
   delete user.password;
   res.json({ user, token: accessToken });
 });
+
+export const logout = asyncHandler(async (req, res) => {
+  res.clearCookie("refreshToken");
+  res.json({ message: "Logged out" });
+});
+
+export const refreshToken = asyncHandler(async (req, res) => {
+  const token = req.cookies.refreshToken;
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ message: "Invalid token" });
+    }
+    const accessToken = generateToken(user);
+    res.json({ token: accessToken });
+  });
+});

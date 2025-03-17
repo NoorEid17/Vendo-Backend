@@ -21,4 +21,8 @@ router.post(
   UserController.login
 );
 
+router.post("/refresh-token", UserController.refreshToken);
+
+router.post("/logout", UserController.logout);
+
 export default router;
