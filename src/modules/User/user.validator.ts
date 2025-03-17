@@ -17,3 +17,8 @@ export const register = [
   body("address").isString(),
   body("phone").isMobilePhone("any"),
 ];
+
+export const login = [
+  body("email").isEmail(),
+  body("password").isLength({ min: 5 }),
+];

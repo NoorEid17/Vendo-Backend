@@ -23,5 +23,23 @@ export const register = asyncHandler(async (req, res) => {
   const accessToken = generateToken(user);
   const refreshToken = generateToken(user);
   res.cookie("refreshToken", refreshToken, { httpOnly: true });
+  delete user.password;
+  res.json({ user, token: accessToken });
+});
+
+export const login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body as User;
+  const user = await userRepository.findOneBy({ email });
+  if (!user) {
+    return res.status(401).json({ message: "Invalid email or password" });
+  }
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+  if (!isPasswordValid) {
+    return res.status(401).json({ message: "Invalid email or password" });
+  }
+  const accessToken = generateToken(user);
+  const refreshToken = generateToken(user);
+  res.cookie("refreshToken", refreshToken, { httpOnly: true });
+  delete user.password;
   res.json({ user, token: accessToken });
 });

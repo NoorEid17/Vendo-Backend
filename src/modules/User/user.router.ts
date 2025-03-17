@@ -14,4 +14,11 @@ router.post(
   UserController.register
 );
 
+router.post(
+  "/login",
+  UserValidator.login,
+  checkValidationResult,
+  UserController.login
+);
+
 export default router;

@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(logger("dev"));
 
-app.use("/api/user", userRouter);
+app.use("/api/users", userRouter);
 
 app.use(errorHandler);
 
