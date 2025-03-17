@@ -16,4 +16,7 @@ export class User {
 
   @Column()
   address: string;
+
+  @Column()
+  phone: string;
 }
