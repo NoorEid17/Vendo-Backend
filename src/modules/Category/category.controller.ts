@@ -10,6 +10,10 @@ export const getAllCategories = asyncHandler(async (req, res) => {
 });
 
 export const createCategory = asyncHandler(async (req, res) => {
+  if (!req.file) {
+    res.status(400).json({ message: "Image is required" });
+    return;
+  }
   const categoryRepository = AppDataSource.getRepository(Category);
   const category = categoryRepository.create({
     ...req.body,

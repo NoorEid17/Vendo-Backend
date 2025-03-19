@@ -6,7 +6,10 @@ export const checkValidationResult = (req, res, next) => {
     return res.status(400).json({
       errors: errors
         .array()
-        .map((err) => ({ [(err as FieldValidationError).path]: err.msg })),
+        .map((err) => ({
+          field: (err as FieldValidationError).path,
+          message: err.msg,
+        })),
     });
   }
   next();

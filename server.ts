@@ -7,6 +7,7 @@ import { AppDataSource } from "./src/config/db";
 
 import userRouter from "./src/modules/User/user.router";
 import categoryRouter from "./src/modules/Category/category.router";
+import productRouter from "./src/modules/Product/product.router";
 import errorHandler from "./src/utils/errorHandler";
 import { PORT } from "./src/config/config";
 
@@ -31,6 +32,7 @@ app.use("/uploads", express.static("uploads"));
 
 app.use("/api/users", userRouter);
 app.use("/api/categories", categoryRouter);
+app.use("/api/products", productRouter);
 
 app.use(errorHandler);
 
