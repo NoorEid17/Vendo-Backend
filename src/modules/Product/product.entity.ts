@@ -1,6 +1,24 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Category } from "../Category/category.entity";
 import { User } from "../User/user.entity";
+
+export type ProductCategory =
+  | "clothing"
+  | "electronics"
+  | "furniture"
+  | "toys"
+  | "books"
+  | "other"
+  | "food"
+  | "accessories"
+  | "sports"
+  | "health"
+  | "beauty"
+  | "automotive"
+  | "garden"
+  | "pet"
+  | "music"
+  | "videoGames"
+  | "homeAppliances";
 
 @Entity()
 export class Product {
@@ -17,13 +35,10 @@ export class Product {
   description: string;
 
   @Column()
-  categoryId: string;
+  category: ProductCategory;
 
   @Column()
   userId: string;
-
-  @ManyToOne(() => Category, (category) => category.products)
-  category: Category;
 
   @ManyToOne(() => User, (user) => user.products)
   user: User;
