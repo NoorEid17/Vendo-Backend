@@ -16,5 +16,13 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false
-  }
+  },
+  "include": [
+    "server.ts",
+    "src/**/*",
+    "test/**/*",
+    "scripts/**/*",
+    "typings/**/*"
+  ],
+  "exclude": ["node_modules", "dist", "coverage", "**/*.spec.ts"]
 }
