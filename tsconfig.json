@@ -1,32 +1,25 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
+    "target": "ES6", // Specify ECMAScript target version
+    "module": "CommonJS", // Use CommonJS for Node.js compatibility
+    "moduleResolution": "Node", // Resolve modules using Node.js style
+    "baseUrl": ".", // Base directory for resolving non-relative module names
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "outDir": "dist", // Output directory for compiled files
+    "esModuleInterop": true, // Allow default imports from CommonJS modules
+    "allowSyntheticDefaultImports": true, // Allow default imports for modules without default exports
+    "strict": true, // Enable all strict type-checking options
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "module": "ESNext", // Changed to ESNext for native import/export
-    "moduleResolution": "node",
-    "target": "ESNext",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": false,
+    "strictFunctionTypes": false,
     "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "lib": ["ESNext", "DOM", "DOM.Iterable", "ES2019.Array", "ES2019.String"]
+    "strictNullChecks": false,
+    "lib": ["ES2021.String"],
+    "emitDecoratorMetadata": true
   },
-  "include": [
-    "server.ts",
-    "src/**/*",
-    "src/modules/**/*",
-    "test/**/*",
-    "scripts/**/*",
-    "typings/**/*"
-  ],
-  "exclude": ["node_modules", "dist", "coverage", "**/*.spec.ts"]
+  "include": ["src", "server.ts"], // Include the src folder and app.ts in the compilation
+  "exclude": ["node_modules"] // Exclude the node_modules folder
 }
