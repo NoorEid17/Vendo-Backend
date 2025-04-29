@@ -6,8 +6,8 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true, // Enables compatibility with CommonJS modules
-    "module": "NodeNext", // Adjust based on your environment (e.g., "ESNext" for ESM)
-    "moduleResolution": "nodenext",
+    "module": "ESNext", // Adjust based on your environment (e.g., "ESNext" for ESM)
+    "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "./dist",
     "incremental": true,
@@ -16,7 +16,8 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "ES2019.Array", "ES2019.String"]
   },
   "include": [
     "server.ts",
