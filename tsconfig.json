@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
+    "esModuleInterop": true, // Enables compatibility with CommonJS modules
+    "module": "NodeNext", // Adjust based on your environment (e.g., "ESNext" for ESM)
+    "moduleResolution": "nodenext",
     "sourceMap": true,
     "outDir": "./dist",
     "incremental": true,
@@ -15,8 +16,7 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "moduleResolution": "nodenext"
+    "noFallthroughCasesInSwitch": false
   },
   "include": [
     "server.ts",

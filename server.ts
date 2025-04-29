@@ -1,9 +1,9 @@
 require("dotenv").config();
 import { setupSwagger } from "./src/config/swaggerConfig";
-import * as express from "express";
-import * as logger from "morgan";
-import * as cors from "cors";
-import * as cookieParser from "cookie-parser";
+import express from "express";
+import logger from "morgan";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import { AppDataSource } from "./src/config/db";
 
 import userRouter from "./src/modules/User/user.router";

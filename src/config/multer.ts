@@ -1,4 +1,4 @@
-import * as multer from "multer";
+import multer from "multer";
 
 const ALLOWED_MIME_TYPES = [
   "image/jpeg",
