@@ -88,9 +88,7 @@ router.get("/", UserController.getUsers);
  *               type: string
  *               example: refreshToken=your_refresh_token; HttpOnly; Path=/; Max-Age=604800; SameSite=None; Secure
  *       400:
- *         description: Bad request
- *       409:
- *         description: Conflict (email already in use)
+ *         description: Bad request (invalid data) or (email is already used)
  *       500:
  *         description: Internal server error
  */
@@ -288,7 +286,7 @@ router.get("/:id", UserController.getUserById);
  *         user:
  *          $ref: '#/components/schemas/User'
  *    400:
- *     description: Bad request (invalid data)
+ *     description: Bad request (invalid data) or (email used)
  *    401:
  *     description: Unauthorized (invalid or expired access token) or incorrect old password
  */

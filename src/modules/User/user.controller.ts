@@ -25,7 +25,7 @@ export const register = asyncHandler(async (req, res) => {
   const user = userRepository.create(req.body as User);
   await userRepository.save(user);
   const accessToken = generateToken(user, {
-    expiresIn: "30m",
+    expiresIn: "1h",
   });
   const refreshToken = generateToken(user);
   res.cookie("refreshToken", refreshToken, { httpOnly: true });
@@ -44,7 +44,7 @@ export const login = asyncHandler(async (req, res) => {
     return res.status(401).json({ message: "Invalid email or password" });
   }
   const accessToken = generateToken(user, {
-    expiresIn: "30m",
+    expiresIn: "1h",
   });
   const refreshToken = generateToken(user);
   res.cookie("refreshToken", refreshToken, { httpOnly: true });
@@ -67,7 +67,7 @@ export const refreshToken = asyncHandler(async (req, res) => {
       return res.status(403).json({ message: "Invalid token" });
     }
     const accessToken = generateToken(user, {
-      expiresIn: "30m",
+      expiresIn: "1h",
     });
     res.json({ token: accessToken });
   });
@@ -97,6 +97,14 @@ export const updateUser = asyncHandler(async (req: AuthReq, res) => {
   if (!user) {
     return res.status(400).json({ message: "Bad Request, token invalid" });
   }
+  if (req.body.email) {
+    const existingUser = await userRepository.findOneBy({
+      email: req.body.email,
+    });
+    if (existingUser && existingUser.id !== id) {
+      return res.status(400).json({ message: "Email already in use" });
+    }
+  }
   if (req.body.password) {
     const isPasswordValid = await bcrypt.compare(
       req.body.oldPassword,
@@ -107,10 +115,13 @@ export const updateUser = asyncHandler(async (req: AuthReq, res) => {
     }
     req.body.password = await bcrypt.hash(req.body.password, BCRYPT_SALT);
   }
+  if (req.body.oldPassword) {
+    delete req.body.oldPassword;
+  }
   if (req.file) {
     req.body.profilePicture = req.file.filename.replaceAll(/\\/g, "/");
   }
-  await userRepository.update(req.params.id, req.body as User);
+  await userRepository.update(id, req.body as User);
   const updatedUser = await userRepository.findOneBy({ id: req.params.id });
   delete updatedUser.password;
   res.json(updatedUser);

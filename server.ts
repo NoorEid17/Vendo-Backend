@@ -14,12 +14,7 @@ import { PORT } from "./src/config/config";
 const app = express();
 app.use(
   cors({
-    origin: [
-      /http:\/\/localhost(:\d+)?/,
-      /http:\/\/192\.168\.1\.\d+(:\d+)?/,
-      /app:\/\//,
-      /exp:\/\//,
-    ],
+    origin: "*",
     credentials: true,
   })
 );
@@ -42,8 +37,8 @@ setupSwagger(app);
 
 app.use("/uploads", express.static("uploads"));
 
-app.use("/api/users", userRouter);
-app.use("/api/products", productRouter);
+app.use("/users", userRouter);
+app.use("/products", productRouter);
 
 app.use(errorHandler);
 

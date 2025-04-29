@@ -135,12 +135,20 @@ const router: Router = Router();
  *                 items:
  *                   type: string
  *                   format: binary
- *               name:
+ *               title:
  *                 type: string
  *               description:
  *                 type: string
  *               price:
  *                 type: number
+ *               location:
+ *                type: string
+ *               phoneNumber:
+ *                type: string
+ *               category:
+ *                type: string
+ *               whatsappLink:
+ *                type: string
  *     responses:
  *       201:
  *         description: Product created successfully
@@ -201,8 +209,10 @@ router.get("/:id", checkAuth, ProductController.getProductById);
 router.post(
   "/",
   checkAuth,
-  upload.single("mainImage"),
-  upload.fields([{ name: "images", maxCount: 5 }]),
+  upload.fields([
+    { name: "mainImage", maxCount: 1 },
+    { name: "images", maxCount: 5 },
+  ]),
   ProductValidator.createProduct,
   checkValidationResult,
   ProductController.createNewProduct

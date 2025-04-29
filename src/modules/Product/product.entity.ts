@@ -43,7 +43,7 @@ export class Product {
   @Column()
   userId: string;
 
-  @ManyToOne(() => User, (user) => user.products)
+  @ManyToOne(() => User, (user) => user.products, { eager: true })
   user: User;
 
   @Column()

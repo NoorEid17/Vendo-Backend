@@ -7,7 +7,6 @@ const emailUnique = async (value) => {
   const user = await userRepository.findOneBy({ email: value });
   if (user) {
     const error = new Error("Email already in use") as any;
-    error.status = 409;
     throw error;
   }
 };
@@ -25,7 +24,7 @@ export const login = [
 
 export const update = [
   body("name").optional().isString(),
-  body("email").optional().isEmail().custom(emailUnique),
+  body("email").optional().isEmail(),
   body("password").optional().isLength({ min: 5 }),
   body("oldPassword").optional().isLength({ min: 5 }),
 ];

@@ -16,7 +16,7 @@ export const createNewProduct = asyncHandler(async (req: AuthReq, res) => {
     return res.status(400).json({ message: "Main Image is required" });
   }
 
-  const mainImageId = mainImage.filename;
+  const mainImageId = mainImage[0].filename;
 
   const imagesIds = images.map((file) => file.filename);
 
@@ -25,7 +25,6 @@ export const createNewProduct = asyncHandler(async (req: AuthReq, res) => {
     mainImage: mainImageId,
     images: imagesIds,
     userId: (req.user as any).id,
-    category: req.body.categoryId,
   });
 
   const savedProduct = await AppDataSource.getRepository(Product).save(
