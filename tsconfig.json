@@ -5,8 +5,8 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true, // Enables compatibility with CommonJS modules
-    "module": "ESNext", // Adjust based on your environment (e.g., "ESNext" for ESM)
+    "esModuleInterop": true,
+    "module": "CommonJS",
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "./dist",
