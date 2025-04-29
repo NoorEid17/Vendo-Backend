@@ -1,4 +1,5 @@
 require("dotenv").config();
+import { setupSwagger } from "./src/config/swaggerConfig";
 import * as express from "express";
 import * as logger from "morgan";
 import * as cors from "cors";
@@ -11,7 +12,17 @@ import errorHandler from "./src/utils/errorHandler";
 import { PORT } from "./src/config/config";
 
 const app = express();
-app.use(cors("*"));
+app.use(
+  cors({
+    origin: [
+      /http:\/\/localhost(:\d+)?/,
+      /http:\/\/192\.168\.1\.\d+(:\d+)?/,
+      /app:\/\//,
+      /exp:\/\//,
+    ],
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 
 AppDataSource.initialize()
@@ -27,6 +38,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(logger("dev"));
 
+setupSwagger(app);
+
 app.use("/uploads", express.static("uploads"));
 
 app.use("/api/users", userRouter);
@@ -38,6 +51,6 @@ app.listen(PORT, (err) => {
   if (err) {
     console.error(err);
   } else {
-    console.log(`Server running on port ${PORT} 🚀`);
+    console.log(`Server running on port: ${PORT} 🚀`);
   }
 });

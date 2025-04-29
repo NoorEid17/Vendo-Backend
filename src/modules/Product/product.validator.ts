@@ -1,31 +1,24 @@
 import { body, query } from "express-validator";
 import AppDataSource from "../../config/db";
-import { Category } from "../Category/category.entity";
-
-const categoryExists = async (value: string) => {
-  const category = await AppDataSource.getRepository(Category).findOneBy({
-    id: value,
-  });
-  if (!category) {
-    return Promise.reject("Category does not exist");
-  }
-};
+import { ProductCategories } from "./product.entity";
 
 export const paginate = [
-  query("category").optional().isUUID().custom(categoryExists),
-  query("page").optional().isInt({ min: 1 }),
-  query("limit").optional().isInt({ min: 1 }),
+  query("category").optional().isIn(ProductCategories),
+  // query("page").optional().isInt({ min: 1 }),
+  // query("limit").optional().isInt({ min: 1 }),
 ];
 
 export const createProduct = [
-  body("name").isString().notEmpty(),
+  body("title").isString().notEmpty(),
+  body("location").isString().notEmpty(),
+  body("phoneNumber").isString().notEmpty(),
   body("price").isNumeric().notEmpty(),
-  body("description").isString().notEmpty(),
-  body("categoryId")
-    .isUUID()
+  body("description").isString().optional(),
+  body("category")
+    .toLowerCase()
+    .trim()
+    .isIn(ProductCategories)
     .withMessage("Category must be a valid UUID")
     .notEmpty()
-    .withMessage("Category is required")
-    .custom(categoryExists)
-    .withMessage("Category does not exist"),
+    .withMessage("Category is required"),
 ];

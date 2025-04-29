@@ -7,7 +7,7 @@ export class User {
   id: string;
 
   @Column()
-  fullName: string;
+  name: string;
 
   @Column()
   email: string;
@@ -15,12 +15,9 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
-  address: string;
-
-  @Column()
-  phone: string;
-
   @OneToMany(() => Product, (product) => product.user)
   products: Product[];
+
+  @Column({ nullable: true })
+  profilePicture: string;
 }
