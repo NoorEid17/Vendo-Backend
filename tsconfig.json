@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "module": "ESNext", // Changed to ESNext for native import/export
     "moduleResolution": "node",
+    "target": "ESNext",
     "sourceMap": true,
     "outDir": "./dist",
     "incremental": true,
