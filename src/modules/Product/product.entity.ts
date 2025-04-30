@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  CreateDateColumn,
+} from "typeorm";
 import { User } from "../User/user.entity";
 
 export const ProductCategories = [
@@ -57,4 +63,7 @@ export class Product {
 
   @Column()
   whatsappLink: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
 }
