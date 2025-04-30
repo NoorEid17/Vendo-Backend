@@ -120,7 +120,7 @@ export const updateUser = asyncHandler(async (req: AuthReq, res) => {
   }
   if (req.file) {
     req.body.profilePicture = req.file.filename;
-    console.log(req.file.filename);
+    console.log("File:", req.file.filename);
     console.log(req.body);
   }
   await userRepository.update(id, req.body as User);
