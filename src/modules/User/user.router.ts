@@ -4,6 +4,7 @@ import * as UserValidator from "./user.validator";
 import { checkValidationResult } from "../../middlewares/checkValidationResult";
 import { checkAuth } from "../../middlewares/checkAuth";
 import { upload } from "../../config/multer";
+import { check } from "express-validator";
 
 const router: Router = Router();
 
@@ -295,6 +296,7 @@ router.patch(
   checkAuth,
   upload.single("profilePicture"),
   UserValidator.update,
+  checkValidationResult,
   UserController.updateUser
 );
 

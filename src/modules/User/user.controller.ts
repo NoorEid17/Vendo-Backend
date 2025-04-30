@@ -123,6 +123,7 @@ export const updateUser = asyncHandler(async (req: AuthReq, res) => {
     console.log("File:", req.file.filename);
     console.log(req.body);
   }
+  console.log(req.body);
   await userRepository.update(id, req.body as User);
   const updatedUser = await userRepository.findOneBy({ id: req.params.id });
   delete updatedUser.password;
