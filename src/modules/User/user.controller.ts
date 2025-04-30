@@ -119,7 +119,7 @@ export const updateUser = asyncHandler(async (req: AuthReq, res) => {
     delete req.body.oldPassword;
   }
   if (req.file) {
-    req.body.profilePicture = req.file.filename.replaceAll(/\\/g, "/");
+    req.body.profilePicture = req.file.filename;
   }
   await userRepository.update(id, req.body as User);
   const updatedUser = await userRepository.findOneBy({ id: req.params.id });
