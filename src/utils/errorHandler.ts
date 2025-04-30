@@ -15,6 +15,9 @@ const errorHandler = (
   const status = err.status || 500;
   const message =
     NODE_ENV === "development" ? err.message : "Internal Server Error";
+  if (NODE_ENV !== "development") {
+    console.error(err);
+  }
 
   res.status(status).json({
     status,
