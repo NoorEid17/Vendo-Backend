@@ -21,13 +21,12 @@ export const ProductCategories = [
   "home appliances",
   "toys",
   "bicycles",
-  "computers",
   "tools",
   "pet supplies",
   "mobile phones",
   "watches",
   "beauty & personal care",
-  "office supplies",
+  "office equipment",
   "real estate",
 ] as const;
 
