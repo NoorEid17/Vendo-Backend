@@ -17,6 +17,18 @@ export const ProductCategories = [
   "movies & music",
   "books",
   "other",
+  "electronics",
+  "home appliances",
+  "toys",
+  "bicycles",
+  "computers",
+  "tools",
+  "pet supplies",
+  "mobile phones",
+  "watches",
+  "beauty & personal care",
+  "office supplies",
+  "real estate",
 ] as const;
 
 export type ProductCategory = (typeof ProductCategories)[number];
@@ -29,7 +41,7 @@ export class Product {
   @Column()
   title: string;
 
-  @Column({ type: "decimal", precision: 2 })
+  @Column({ type: "decimal", scale: 2 })
   price: number;
 
   @Column({
